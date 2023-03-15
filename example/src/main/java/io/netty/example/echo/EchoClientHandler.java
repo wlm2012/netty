@@ -19,6 +19,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.CharsetUtil;
 
 /**
  * Handler implementation for the echo client.  It initiates the ping-pong
@@ -46,6 +47,8 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
+        ByteBuf in = (ByteBuf) msg;
+        System.out.println(in.toString(CharsetUtil.US_ASCII));
         ctx.write(msg);
     }
 
